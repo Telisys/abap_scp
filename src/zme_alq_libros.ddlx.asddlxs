@@ -1,0 +1,71 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Libro',
+    typeNamePlural: 'Libros',
+    typeImageUrl: '',
+    imageUrl: '',
+    title: {
+        type: #STANDARD,
+        label: '',
+        iconUrl: '',
+        criticality: '',
+        criticalityRepresentation: #WITHOUT_ICON,
+        value: 'IdLibro',
+        valueQualifier: '',
+        targetElement: '',
+        url: ''
+    },
+    description: {
+        type: #STANDARD,
+        label: '',
+        iconUrl: '',
+        criticality: '',
+        criticalityRepresentation: #WITHOUT_ICON,
+        value: 'Titulo',
+        valueQualifier: '',
+        targetElement: '',
+        url: ''
+    }
+}
+@Search.searchable: true
+annotate view zvi_alq_libros with
+{
+  @UI.facet: [{ id: 'DetalleLibro', label: 'Detalle del Libro', type: #COLLECTION, position: 10 },
+  { id: 'Libro', parentId: 'DetalleLibro', label: 'Detalles', type:#FIELDGROUP_REFERENCE,
+    targetQualifier: 'DetalleLibro', position: 10 },
+  { id: 'Cliente', label: 'Clientes', type: #LINEITEM_REFERENCE,
+    targetElement: '_Clientes', position: 20 }]
+
+  @UI.fieldGroup: [{ qualifier: 'DetalleLibro', position: 10 }]
+  IdLibro;
+  @UI.fieldGroup: [{ qualifier: 'DetalleLibro', position: 20 }]
+  Precio;
+  @UI.fieldGroup: [{ qualifier: 'DetalleLibro', position: 30 }]
+  Moneda;
+  @UI.fieldGroup: [{ qualifier: 'DetalleLibro', position: 40 }]
+  Paginas;
+
+  @UI: { lineItem: [{ position: 10, importance: #HIGH }],
+         selectionField: [{ position: 10 }] }
+  Titulo;
+  @UI.lineItem: [{ position: 20, importance: #HIGH }]
+  Autor;
+  @UI: { lineItem: [{ position: 30, importance: #MEDIUM }],
+         selectionField: [{ position: 20 }] }
+  @Consumption.valueHelpDefinition: [{
+        entity: { name: 'ZVB_CATEGORIA', element: 'Categoria' } }]
+  Categoria;
+  @UI.lineItem: [{ position: 40, importance: #MEDIUM }]
+  Formato;
+  @UI.lineItem: [{ position: 70, importance: #LOW }]
+  @Search: {
+      defaultSearchElement: true,
+      ranking: #MEDIUM,
+      fuzzinessThreshold: 0.8
+  }
+  Editorial;
+  @UI.lineItem: [{ position: 80, importance: #HIGH,
+                   label: 'Cant.Vendida', criticality: 'Ventas' }]
+  CantVend;
+
+}

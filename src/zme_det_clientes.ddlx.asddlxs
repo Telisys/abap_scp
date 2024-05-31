@@ -1,0 +1,49 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Cliente',
+    typeNamePlural: 'Clientes',
+    typeImageUrl: '',
+    imageUrl: '',
+    title: {
+        type: #STANDARD,
+        label: '',
+        iconUrl: '',
+        criticality: '',
+        criticalityRepresentation: #WITHOUT_ICON,
+        value: 'IdCliente',
+        valueQualifier: '',
+        targetElement: '',
+        url: ''
+    },
+    description: {
+        type: #STANDARD,
+        label: '',
+        iconUrl: '',
+        criticality: '',
+        criticalityRepresentation: #WITHOUT_ICON,
+        value: 'Apellido',
+        valueQualifier: '',
+        targetElement: '',
+        url: ''
+    }
+}
+annotate view zvb_det_clientes with
+{
+
+  @UI.lineItem: [{ position: 10, importance: #HIGH }]
+  IdCliente;
+  @UI.lineItem: [{ position: 40, importance: #MEDIUM, label: 'Tipo de Acceso' }]
+  TipoAcceso;
+
+  @UI.facet: [{ id: 'DetalleCliente', label: 'Detalle del Cliente', type: #COLLECTION, position: 10 },
+  { id: 'Cliente', parentId: 'DetalleCliente', label: 'Det.Clientes', type:#FIELDGROUP_REFERENCE,
+    targetQualifier: 'DetalleCliente', position: 10 }]
+
+  @UI.fieldGroup: [{ qualifier: 'DetalleCliente', position: 10 }]
+  Apellido;
+  @UI.fieldGroup: [{ qualifier: 'DetalleCliente', position: 20 }]
+  Nombre;
+  @UI.fieldGroup: [{ qualifier: 'DetalleCliente', position: 30 }]
+  Email;
+  
+}

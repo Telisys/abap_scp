@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Def. Venta de Libros'
+define service Zsd_alq_libros {
+  expose zvi_alq_libros   as Libros;
+  expose zvb_det_clientes as Clientes;
+}
